@@ -54,54 +54,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: UnstorageAdapter(storage),
   providers: [
     Apple,
-    // Atlassian,
-    Auth0,
-    AzureB2C,
-    BankIDNorway,
-    BoxyHQSAML({
-      clientId: "dummy",
-      clientSecret: "dummy",
-      issuer: process.env.AUTH_BOXYHQ_SAML_ISSUER,
-    }),
-    Cognito,
-    Coinbase,
-    Discord,
-    Dropbox,
-    Facebook,
-    GitHub,
-    GitLab,
-    Google,
-    Hubspot,
-    Keycloak({ name: "Keycloak (bob/bob)" }),
-    LinkedIn,
-    MicrosoftEntraId,
-    Netlify,
-    Okta,
-    Passkey({
-      formFields: {
-        email: {
-          label: "Username",
-          required: true,
-          autocomplete: "username webauthn",
-        },
-      },
-    }),
-    Passage,
-    Pinterest,
-    Reddit,
-    Salesforce,
-    Slack,
-    Spotify,
-    Twitch,
-    Twitter,
-    Vipps({
-      issuer: "https://apitest.vipps.no/access-management-1.0/access/",
-    }),
-    WorkOS({ connection: process.env.AUTH_WORKOS_CONNECTION! }),
-    Zoom,
   ],
   basePath: "/auth",
   session: { strategy: "jwt" },
+  pages: {
+    signIn: 'http://localhost:3000/any-page-will-break'
+  },
   callbacks: {
     authorized({ request, auth }) {
       const { pathname } = request.nextUrl
